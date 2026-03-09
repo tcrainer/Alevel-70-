@@ -482,46 +482,52 @@ export const vocabulary: Word[] = [
   ...topic10Vocab,
   ...topic11Vocab,
   ...topic12Vocab,
-  ...topicAVocab
-    .trim()
-    .split("\n")
-    .map((line, index) => {
-      const [day, german, english] = line.split("\t");
-      return {
-        id: `word_A_${index}`,
-        topicId: "A",
-        day: parseInt(day, 10),
-        german: german?.trim() || "",
-        english: english?.trim() || "",
-      };
-    })
-    .filter((w) => w.german && w.english && !isNaN(w.day)),
-  ...topicWVocab
-    .trim()
-    .split("\n")
-    .map((line, index) => {
-      const [day, german, english] = line.split("\t");
-      return {
-        id: `word_W_${index}`,
-        topicId: "W",
-        day: parseInt(day, 10),
-        german: german?.trim() || "",
-        english: english?.trim() || "",
-      };
-    })
-    .filter((w) => w.german && w.english && !isNaN(w.day)),
-  ...topicVVocab
-    .trim()
-    .split("\n")
-    .map((line, index) => {
-      const [day, german, english] = line.split("\t");
-      return {
-        id: `word_V_${index}`,
-        topicId: "V",
-        day: parseInt(day, 10),
-        german: german?.trim() || "",
-        english: english?.trim() || "",
-      };
-    })
-    .filter((w) => w.german && w.english && !isNaN(w.day)),
+  ...(Array.isArray(topicAVocab)
+    ? topicAVocab
+    : (topicAVocab as unknown as string)
+        .trim()
+        .split("\n")
+        .map((line, index) => {
+          const [day, german, english] = line.split("\t");
+          return {
+            id: `word_A_${index}`,
+            topicId: "A",
+            day: parseInt(day, 10),
+            german: german?.trim() || "",
+            english: english?.trim() || "",
+          };
+        })
+        .filter((w) => w.german && w.english && !isNaN(w.day))),
+  ...(Array.isArray(topicWVocab)
+    ? topicWVocab
+    : (topicWVocab as unknown as string)
+        .trim()
+        .split("\n")
+        .map((line, index) => {
+          const [day, german, english] = line.split("\t");
+          return {
+            id: `word_W_${index}`,
+            topicId: "W",
+            day: parseInt(day, 10),
+            german: german?.trim() || "",
+            english: english?.trim() || "",
+          };
+        })
+        .filter((w) => w.german && w.english && !isNaN(w.day))),
+  ...(Array.isArray(topicVVocab)
+    ? topicVVocab
+    : (topicVVocab as unknown as string)
+        .trim()
+        .split("\n")
+        .map((line, index) => {
+          const [day, german, english] = line.split("\t");
+          return {
+            id: `word_V_${index}`,
+            topicId: "V",
+            day: parseInt(day, 10),
+            german: german?.trim() || "",
+            english: english?.trim() || "",
+          };
+        })
+        .filter((w) => w.german && w.english && !isNaN(w.day))),
 ];
